@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -17,6 +13,14 @@
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+button {
+  margin: 10px;
+  border-radius: 50%;
+  padding: 25px;
+  background-color: rgb(12, 152, 98);
+  font-weight: bolder;
+}
+
+li {
+  font-size: calc(10px + 1vmin);  
 }
