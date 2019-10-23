@@ -11,16 +11,14 @@ class Stopwatch extends React.Component {
       splitTime: 0
     };
 
-    // **** Denna behövs om vi inte har arrow function på functions för this ska fungera func körs ****
+    // **** Denna behövs för att this ska fungera med functions i return så inte this pekar på HTML, slipper med arrow function i dem ****
     this.startPause = this.startPause.bind(this);
     this.resetTime = this.resetTime.bind(this);
     this.addSplitTime = this.addSplitTime.bind(this);
   }
 
   startPause() {
-    if (!this.state.timerPaused) {
-      clearInterval(this.timer);
-    } else {
+    if (this.state.timerPaused) {
       this.setState({
         startTime: Date.now() - this.state.elapsedTime
       });
@@ -30,6 +28,8 @@ class Stopwatch extends React.Component {
           elapsedTime: Date.now() - this.state.startTime
         });
       }, 100);
+    } else {
+      clearInterval(this.timer);
     }
 
     this.setState({
@@ -44,13 +44,12 @@ class Stopwatch extends React.Component {
   }
 
   resetTime() {
+    clearInterval(this.timer);
     this.setState({
       elapsedTime: 0,
       timerPaused: true,
       splitTime: 0
     });
-
-    clearInterval(this.timer);
   }
 
   render() {
@@ -94,7 +93,7 @@ class Stopwatch extends React.Component {
               {this.state.splitTime !== 0 && (
                 <ol>
                   <h3>SPLIT TIME</h3>
-                  <li>{hour} : {min} : {sec} : {centisec} </li>
+                  <li> {hour} : {min} : {sec} : {centisec} </li>
                 </ol>
               )}
             </div>
@@ -104,5 +103,4 @@ class Stopwatch extends React.Component {
     );
   }
 }
-
 export default Stopwatch;
