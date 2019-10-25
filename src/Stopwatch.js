@@ -8,7 +8,8 @@ class Stopwatch extends React.Component {
       startTime: 0,
       elapsedTime: 0,
       timerPaused: true,
-      splitTime: 0
+      splitTime: 0,
+      splitTimeList: []
     };
 
     // **** Denna behövs för att this ska fungera med functions i return så inte this pekar på HTML, slipper med arrow function i dem ****
@@ -41,6 +42,13 @@ class Stopwatch extends React.Component {
     this.setState({
       splitTime: this.state.elapsedTime
     });
+
+    // this.splitTimeList.map((splitTime) => {
+    //   return splitTime
+    // })
+
+
+    // spread operator eller map() med push? 
   }
 
   resetTime() {
@@ -53,7 +61,7 @@ class Stopwatch extends React.Component {
   }
 
   render() {
-    const { elapsedTime, splitTime } = this.state;
+    const { elapsedTime, splitTime, splitTimeList } = this.state;
     let centiseconds = ("0" + (Math.floor(elapsedTime / 10) % 100)).slice(-2);
     let seconds = ("0" + (Math.floor(elapsedTime / 1000) % 60)).slice(-2);
     let minutes = ("0" + (Math.floor(elapsedTime / 60000) % 60)).slice(-2);
@@ -93,6 +101,7 @@ class Stopwatch extends React.Component {
               {this.state.splitTime !== 0 && (
                 <ol>
                   <h3>SPLIT TIME</h3>
+                  {this.splitTimeList}
                   <li> {hour} : {min} : {sec} : {centisec} </li>
                 </ol>
               )}
